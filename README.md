@@ -10,3 +10,5 @@ export projectid=<google project id>
 export dataset=<dataset to put tables in >
 
 Script is python 2.7 based 
+Requires googlle sdk installled including bq command line tool
+To run install you must be llogged in and have created dataset for tables and views first and at lleast have editor rights on the dataset.
