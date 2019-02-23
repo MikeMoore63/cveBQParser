@@ -1,0 +1,143 @@
+[
+  {
+        "mode": "NULLABLE",
+        "name": "source",
+        "type": "STRING"
+  },
+  {
+    "fields": [
+        {
+            "mode": "NULLABLE",
+            "name": "name",
+            "type": "STRING"
+        },
+        {
+            "fields": [
+                {
+                    "mode": "NULLABLE",
+                    "name": "date",
+                    "type": "TIMESTAMP"
+                },
+                {
+                    "fields": [
+                        {
+                            "mode": "NULLABLE",
+                            "name": "type",
+                            "type": "STRING"
+                        },
+                        {
+                            "mode": "NULLABLE",
+                            "name": "name",
+                            "type": "STRING"
+                        }
+                    ],
+                    "mode": "NULLABLE",
+                    "name": "cpe_23_deprecated_by",
+                    "type": "RECORD"
+                }
+            ],
+            "mode": "NULLABLE",
+            "name": "cpe_23_deprecation",
+            "type": "RECORD"
+          }
+    ], 
+    "mode": "NULLABLE", 
+    "name": "cpe_23_cpe23_item",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+        {
+            "mode": "NULLABLE",
+            "name": "note",
+            "type": "STRING"
+        },
+        {
+            "mode": "NULLABLE",
+            "name": "xml_lang",
+            "type": "STRING"
+        }
+    ],
+    "mode": "NULLABLE",
+    "name": "notes",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+        {
+            "mode": "NULLABLE",
+            "name": "text",
+            "type": "STRING"
+        },
+        {
+            "mode": "NULLABLE",
+            "name": "href",
+            "type": "STRING"
+        },
+        {
+            "mode": "NULLABLE",
+            "name": "system",
+            "type": "STRING"
+        }
+    ],
+    "mode": "NULLABLE",
+    "name": "check",
+    "type": "RECORD"
+  },
+  {
+    "fields": [
+        {
+            "fields": [
+                {
+                    "mode": "NULLABLE",
+                    "name": "text",
+                    "type": "STRING"
+                },
+                {
+                    "mode": "NULLABLE",
+                    "name": "href",
+                    "type": "STRING"
+                }
+             ],
+            "mode": "NULLABLE",
+            "name": "reference",
+            "type": "RECORD"
+        }
+    ],
+    "mode": "NULLABLE",
+    "name": "references",
+    "type": "RECORD"
+  },
+  {
+        "mode": "NULLABLE",
+        "name": "name",
+        "type": "STRING"
+  },
+  {
+    "fields": [
+        {
+            "mode": "NULLABLE",
+            "name": "text",
+            "type": "STRING"
+        },
+        {
+            "mode": "NULLABLE",
+            "name": "xml_lang",
+            "type": "STRING"
+        }
+    ],
+    "mode": "NULLABLE",
+    "name": "title",
+    "type": "RECORD"
+  },
+  {
+        "mode": "NULLABLE",
+        "name": "deprecated",
+        "type": "BOOLEAN"
+  },
+  {
+        "mode": "NULLABLE",
+        "name": "deprecation_date",
+        "type": "TIMESTAMP"
+  }
+]
