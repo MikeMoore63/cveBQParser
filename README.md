@@ -23,3 +23,5 @@ bash ./mkcve.sh
 To download parses and load daat into current dates partition after environment variables set is  (this invokes the python script and once local files invokes bq command line to load the data)
 
 bash ./ldcve.sh
+
+Or alternatively I made the data I have loaded publicly readable here https://bigquery.cloud.google.com/dataset/forsettidev-167609:nistcve
