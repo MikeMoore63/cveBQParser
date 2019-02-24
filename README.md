@@ -8,9 +8,9 @@ config
 
 setenvironment variables
 
-export projectid=<google project id>
+export projectid=&lt;google project id>
 
-export dataset=<dataset to put tables in >
+export dataset=&lt;dataset to put tables in >
 
 Script is python 2.7 based 
 Requires googlle sdk installled including bq command line tool
