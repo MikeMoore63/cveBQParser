@@ -5,8 +5,11 @@ Uploads into a day partitioned table(s) in Google Big Query each download is loa
 Provides support scripts to create tables and downloads and load
 
 config
+
 setenvironment variables
+
 export projectid=<google project id>
+
 export dataset=<dataset to put tables in >
 
 Script is python 2.7 based 
