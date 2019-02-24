@@ -1,8 +1,8 @@
 # cveBQParser 
 Noddy python cve and cpe parser that downoads cve and cpe data from NIST
-Converts to jon newlline
+Converts to json newline
 Uploads into a day partitioned table(s) in Google Big Query each download is loaded into day partition of download
-Provides support scripts to create tables and diwnloadsand load
+Provides support scripts to create tables and downloads and load
 
 config
 setenvironment variables
