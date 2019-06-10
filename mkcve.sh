@@ -86,8 +86,6 @@ SELECT
   REGEXP_EXTRACT(name,r'^(cpe:2.3:[^:]+:[^:]+:[^:]+):') AS cpeproductprefix
 FROM
     `zzprojectidzz.zzdatasetidzz.cpevpvhead` 
-WHERE
-  majorVersion IS NULL
 EOF
 cat /tmp/schema.$$.query | sed -e "s=zzprojectidzz=${projectid}=" | sed -e  "s=zzdatasetidzz=${dataset}=" > /tmp/schema.$$.query2
 QUERY=`cat /tmp/schema.$$.query2`
@@ -102,9 +100,6 @@ SELECT
   concat(REGEXP_EXTRACT(name,r'^(cpe:2.3:[^:]+:[^:]+:[^:]+):'),':',majorVersion) AS cpeproductmvprefix
 FROM
     `zzprojectidzz.zzdatasetidzz.cpevpvhead`
-WHERE
-  majorVersion IS NOT NULL
-  AND minorVersion IS NULL
 EOF
 cat /tmp/schema.$$.query | sed -e "s=zzprojectidzz=${projectid}=" | sed -e  "s=zzdatasetidzz=${dataset}=" > /tmp/schema.$$.query2
 QUERY=`cat /tmp/schema.$$.query2`

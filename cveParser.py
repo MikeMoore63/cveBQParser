@@ -30,7 +30,7 @@ def removeBareLists(adict):
         newdict[newkey] = adict[i]
     return newdict
 
-cveuri = "https://nvd.nist.gov/vuln/data-feeds"
+cveuri = "https://nvd.nist.gov/vuln/data-feeds#JSON_FEED"
 cpexmluri = "https://nvd.nist.gov/feeds/xml/cpe/dictionary/official-cpe-dictionary_v2.3.xml.gz"
 spdxlicenses = "https://github.com/spdx/license-list-data/blob/master/json/licenses.json"
 cpeout = "cpe.jsonl"
@@ -58,7 +58,7 @@ with open(cpeout, mode='wb') as cpeoutfh, open(cveout, mode='wb') as cveoutfh:
         bits = r.text.split('.json.gz')
         jsongzipuris=[]
         for b in bits[:len(bits)-1]:
-            bitty = b.split("<a href='")
+            bitty = b.split('<a href="')
             if len(bitty) >= 1:
                 uriprefix = bitty[len(bitty)-1]
                 jsongzipuris.append(uriprefix + ".json.gz")
