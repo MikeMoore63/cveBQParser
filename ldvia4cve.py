@@ -6,6 +6,17 @@ import os
 from jinja2 import Environment, select_autoescape, FileSystemLoader, TemplateNotFound
 
 INVALIDBQFIELDCHARS = re.compile(r"[^a-zA-Z0-9_]")
+HEADVIEW = """#standardSQL
+SELECT
+  *
+FROM
+  `{}.{}.{}`
+WHERE
+  _PARTITIONTIME = (
+  SELECT
+    MAX(_PARTITIONTIME)
+  FROM
+    `{}.{}.{}`)"""
 
 def get_json_struct(jsonobj,template=None):
     if template is None:
@@ -18,17 +29,17 @@ def get_json_struct(jsonobj,template=None):
             value = None
             if isinstance(jsonobj[key],bool):
                 value = False
-            if isinstance(jsonobj[key], str):
+            elif isinstance(jsonobj[key], str):
                 value = ""
-            if isinstance(jsonobj[key], unicode):
+            elif isinstance(jsonobj[key], unicode):
                 value = u""
-            if isinstance(jsonobj[key], int):
+            elif isinstance(jsonobj[key], int):
                 value = 0
-            if isinstance(jsonobj[key], float):
+            elif isinstance(jsonobj[key], float):
                 value = 0.0
-            if isinstance(jsonobj[key], dict):
+            elif isinstance(jsonobj[key], dict):
                 value = get_json_struct(jsonobj[key])
-            if isinstance(jsonobj[key], list):
+            elif isinstance(jsonobj[key], list):
                 if len(jsonobj[key]) == 0:
                     value = [{}]
                 else:
@@ -106,23 +117,23 @@ def get_bq_schema_from_json_repr(jsondict):
         if isinstance(data, bool):
             field["type"]="BOOLEAN"
             field["mode"] = "NULLABLE"
-        if isinstance(data, str):
+        elif isinstance(data, str):
             field["type"] = "STRING"
             field["mode"] = "NULLABLE"
-        if isinstance(data, unicode):
+        elif isinstance(data, unicode):
             field["type"] = "STRING"
             field["mode"] = "NULLABLE"
-        if isinstance(data, int):
+        elif isinstance(data, int):
             field["type"] = "INTEGER"
             field["mode"] = "NULLABLE"
-        if isinstance(data, float):
+        elif isinstance(data, float):
             field["type"] = "FLOAT"
             field["mode"] = "NULLABLE"
-        if isinstance(data, dict):
+        elif isinstance(data, dict):
             field["type"] = "RECORD"
             field["mode"] = "NULLABLE"
             field["fields"] = get_bq_schema_from_json_repr(data)
-        if isinstance(data, list):
+        elif isinstance(data, list):
             field["type"] = "RECORD"
             field["mode"] = "REPEATED"
             field["fields"] = get_bq_schema_from_json_repr(data[0])
@@ -167,6 +178,20 @@ with open("mkvia4cveschema.sh", mode='wb+') as fh, open("ldvia4cve.sh", mode='wb
                "schema": {}
         }
         table["schema"]["fields"] = get_bq_schema_from_json_repr(data)
+        resourcelist.append(table)
+        table = {
+            "type": "VIEW",
+            "tableReference": {
+                "projectId": os.environ["projectid"],
+                "datasetId": os.environ["dataset"],
+                "tableId": key +"head"
+            },
+            "view": {
+                "query":HEADVIEW.format(os.environ["projectid"],os.environ["dataset"],key,os.environ["projectid"],os.environ["dataset"],key),
+                "useLegacySql":False
+
+            }
+        }
         resourcelist.append(table)
         print(
             'bq  --project={} load --replace --source_format=NEWLINE_DELIMITED_JSON {}.{}\$`date +%Y%m%d` {}.jsonl'.format(

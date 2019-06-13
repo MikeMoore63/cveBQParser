@@ -37,7 +37,7 @@ QUERY=`cat /tmp/schema.$$.query2`
 bq  --project_id=${projectid} mk  --use_legacy_sql=false --view="${QUERY}"   --description='Latest download of cpe data' ${dataset}.cvehead
 
 cat > /tmp/schema.$$.query <<'EOF'
-#standardySQL
+#standardSQL
 SELECT
     REGEXP_EXTRACT(cpe_23_cpe23_item.name,r'^cpe:2.3:[^:]+:([^:]+):') AS vendor,
     REGEXP_EXTRACT(cpe_23_cpe23_item.name,r'^cpe:2.3:[^:]+:[^:]+:([^:]+):') AS product,
@@ -55,7 +55,7 @@ QUERY=`cat /tmp/schema.$$.query2`
 bq  --project_id=${projectid} mk  --use_legacy_sql=false --view="${QUERY}"   --description='Latest download of cve data with vendor, product and versiona(vpv) as columns from cpe uri' ${dataset}.cpevpvhead
 
 cat > /tmp/schema.$$.query <<'EOF'
-#standardySQL
+#standardSQL
 SELECT
     REGEXP_EXTRACT(cpe_match.cpe23Uri,r'^cpe:2.3:[^:]+:([^:]+):') AS vendor,
     REGEXP_EXTRACT(cpe_match.cpe23Uri,r'^cpe:2.3:[^:]+:[^:]+:([^:]+):') AS product,
@@ -79,7 +79,7 @@ QUERY=`cat /tmp/schema.$$.query2`
 bq  --project_id=${projectid} mk  --use_legacy_sql=false --view="${QUERY}"   --description='Latest download of cve data with vendor, product and versiona(vpv) as columns from cpe uri' ${dataset}.cvevpvhead
 
 cat > /tmp/schema.$$.query <<'EOF'
-#standardySQL
+#standardSQL
 SELECT
   DISTINCT vendor,
   product,
@@ -92,7 +92,7 @@ QUERY=`cat /tmp/schema.$$.query2`
 bq  --project_id=${projectid} mk  --use_legacy_sql=false --view="${QUERY}"   --description='cpe products so has vendor product and cpe prefix to matchi to a product' ${dataset}.cpevpproducthead
 
 cat > /tmp/schema.$$.query <<'EOF'
-#standardySQL
+#standardSQL
 SELECT
   DISTINCT vendor,
   product,
