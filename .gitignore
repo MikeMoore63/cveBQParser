@@ -106,3 +106,6 @@ venv.bak/
 *.jsonl
 params
 .idea*
+mkcve.sh
+ldvia4cve.sh
+mkvia4cveschema.sh

@@ -40,6 +40,8 @@ for key in template:
 
 # generate a bash script to create tables of right schema
 with open("mkvia4cveschema.sh", mode='wb+') as fh, open("ldvia4cve.sh", mode='wb+') as lfh :
+    print(
+        'bash mkvia4cveschema.sh', file=lfh)
     # generate table creation scripts
     resourcelist=[]
     for key,data in newtemplate.items():
